@@ -1,13 +1,23 @@
-import java.util.Scanner;
 package com.KoreaIT.java.BAM;
+
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("==프로그램 실행==");
-		System.out.println("명령어 ) ");
+		System.out.println("==프로그램 시작==");
+
 		Scanner sc = new Scanner(System.in);
-		String str = sc.nextLine();
-		System.out.printf("입력하신 명령어 : %s\n",str);
+
+		while (true) {
+			System.out.printf("명령어 ) ");
+			String command = sc.nextLine();
+
+			if (command.equals("exit")) {
+				break;
+			}
+		}
+
 		System.out.println("==프로그램 끝==");
+		sc.close();
 	}
 }
