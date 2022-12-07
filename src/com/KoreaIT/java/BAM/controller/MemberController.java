@@ -1,10 +1,9 @@
 package com.KoreaIT.java.BAM.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.KoreaIT.java.BAM.dto.Article;
+import com.KoreaIT.java.AM.container.Container;
 import com.KoreaIT.java.BAM.dto.Member;
 import com.KoreaIT.java.BAM.util.Util;
 
@@ -17,7 +16,7 @@ public class MemberController extends Controller {
 
 	public MemberController(Scanner sc) {
 		this.sc = sc;
-		this.members = new ArrayList<Member>();
+		this.members = Container.memberDao.members;
 	}
 
 	public void doAction(String command, String actionMethodName) {
@@ -72,7 +71,7 @@ public class MemberController extends Controller {
 	}
 
 	private void doJoin() {
-		int id = members.size() + 1;
+		int id = Container.memberDao.getNewId();
 		String regDate = Util.getTimeAndDateStr();
 		String updateDate = regDate;
 		String loginId = null;
@@ -122,7 +121,7 @@ public class MemberController extends Controller {
 			break;
 		}
 		Member member = new Member(id, regDate, updateDate, loginId, loginPw, name);
-		members.add(member);
+		Container.memberDao.add(member);
 
 		System.out.printf("%d번 회원이 가입 하였습니다\n", id);
 
@@ -163,9 +162,32 @@ public class MemberController extends Controller {
 	public void makeTestData() {
 		System.out.println("테스트를 위한 회원 데이터를 생성합니다");
 
-		members.add(new Member(1, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "admin", "admin", "관리자"));
-		members.add(new Member(2, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "asd", "asd", "회원1"));
-		members.add(new Member(3, Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "qwe", "qwe", "회원2"));
+		Container.memberDao.add(new Member(Container.memberDao.getNewId(), Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "admin", "admin", "관리자"));
+		Container.memberDao.add(new Member(Container.memberDao.getNewId(), Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "asd", "asd", "김영희"));
+		Container.memberDao.add(new Member(Container.memberDao.getNewId(), Util.getTimeAndDateStr(), Util.getTimeAndDateStr(), "qwe", "qwe", "김철수"));
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
